@@ -1,0 +1,37 @@
+# VS Code
+*.code-workspace
+.vscode/
+
+# Gradle
+.gradle/
+
+# Jetbrains IDE's
+.idea/
+*.iml
+
+# Compilation
+build/
+out/
+generated/
+bin/
+gen/
+/workspace/.run/
+
+# NodeJS
+node_modules/
+
+# MacOS files
+.DS_Store
+
+# Others
+#/workspace/
+#/workspace/.*(?!(gradle|properties))
+*.log
+*.log.gz
+
+# Local dev yml contexts
+**/application-local-*
+**/logback-local-*
+
+# Helm
+*.yaml.dec
