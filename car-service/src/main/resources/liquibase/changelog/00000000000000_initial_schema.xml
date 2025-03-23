@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="1" author="oleg.petrov">
+        <createTable tableName="makes">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="oleg.petrov">
+        <createTable tableName="models">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="make_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_models_makes" referencedTableName="makes" referencedColumnNames="id"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+        <createIndex indexName="idx_models_makes" tableName="models">
+            <column name="make_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="3" author="oleg.petrov">
+        <createTable tableName="managers">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="phone" type="varchar(20)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="oleg.petrov">
+        <createTable tableName="cars">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="model_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_car_model" referencedTableName="models" referencedColumnNames="id"/>
+            </column>
+            <column name="price" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+            <column name="year" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mileage" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fuel" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transmission" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="drive" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="color" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="engine" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hp" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="body" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="places" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text"/>
+            <column name="location_address" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="manager_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_car_manager" referencedTableName="managers" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="idx_car_model" tableName="cars">
+            <column name="model_id"/>
+        </createIndex>
+        <createIndex indexName="idx_car_manager" tableName="cars">
+            <column name="manager_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="5" author="oleg.petrov">
+        <createTable tableName="car_photos">
+            <column name="car_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_car_photos_car" referencedTableName="cars" referencedColumnNames="id"/>
+            </column>
+            <column name="photo_url" type="varchar(255)"/>
+        </createTable>
+        <createIndex indexName="idx_car_photos_car" tableName="car_photos">
+            <column name="car_id"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="6" author="oleg.petrov">
+        <!-- Insert Makes -->
+        <insert tableName="makes">
+            <column name="name" value="Toyota"/>
+        </insert>
+        <insert tableName="makes">
+            <column name="name" value="BMW"/>
+        </insert>
+        <insert tableName="makes">
+            <column name="name" value="Ford"/>
+        </insert>
+
+        <!-- Insert Models -->
+        <insert tableName="models">
+            <column name="make_id" value="1"/>
+            <column name="name" value="Corolla"/>
+        </insert>
+        <insert tableName="models">
+            <column name="make_id" value="1"/>
+            <column name="name" value="Camry"/>
+        </insert>
+        <insert tableName="models">
+            <column name="make_id" value="1"/>
+            <column name="name" value="RAV4"/>
+        </insert>
+
+        <insert tableName="models">
+            <column name="make_id" value="2"/>
+            <column name="name" value="X5"/>
+        </insert>
+        <insert tableName="models">
+            <column name="make_id" value="2"/>
+            <column name="name" value="M3"/>
+        </insert>
+        <insert tableName="models">
+            <column name="make_id" value="2"/>
+            <column name="name" value="Z4"/>
+        </insert>
+
+        <insert tableName="models">
+            <column name="make_id" value="3"/>
+            <column name="name" value="Mustang"/>
+        </insert>
+        <insert tableName="models">
+            <column name="make_id" value="3"/>
+            <column name="name" value="F-150"/>
+        </insert>
+        <insert tableName="models">
+            <column name="make_id" value="3"/>
+            <column name="name" value="Explorer"/>
+        </insert>
+
+        <!-- Insert Managers -->
+        <insert tableName="managers">
+            <column name="name" value="John Doe"/>
+            <column name="phone" value="+123456789"/>
+        </insert>
+        <insert tableName="managers">
+            <column name="name" value="Jane Smith"/>
+            <column name="phone" value="+987654321"/>
+        </insert>
+
+        <!-- Insert Cars -->
+        <insert tableName="cars">
+            <column name="model_id" value="1"/>
+            <column name="price" value="25000"/>
+            <column name="year" value="2022"/>
+            <column name="mileage" value="5000"/>
+            <column name="fuel" value="PETROL"/>
+            <column name="transmission" value="AUTOMATIC"/>
+            <column name="drive" value="FWD"/>
+            <column name="color" value="Red"/>
+            <column name="engine" value="2000"/>
+            <column name="hp" value="168"/>
+            <column name="body" value="Sedan"/>
+            <column name="places" value="5"/>
+            <column name="description" value="Almost new Corolla."/>
+            <column name="location_address" value="123 Main St"/>
+            <column name="manager_id" value="1"/>
+        </insert>
+
+        <insert tableName="cars">
+            <column name="model_id" value="2"/>
+            <column name="price" value="30000"/>
+            <column name="year" value="2021"/>
+            <column name="mileage" value="12000"/>
+            <column name="fuel" value="HYBRID"/>
+            <column name="transmission" value="AUTOMATIC"/>
+            <column name="drive" value="FWD"/>
+            <column name="color" value="Blue"/>
+            <column name="engine" value="2500"/>
+            <column name="hp" value="200"/>
+            <column name="body" value="Sedan"/>
+            <column name="places" value="5"/>
+            <column name="description" value="Fuel-efficient Camry."/>
+            <column name="location_address" value="456 Elm St"/>
+            <column name="manager_id" value="2"/>
+        </insert>
+
+        <insert tableName="cars">
+            <column name="model_id" value="3"/>
+            <column name="price" value="35000"/>
+            <column name="year" value="2023"/>
+            <column name="mileage" value="8000"/>
+            <column name="fuel" value="PETROL"/>
+            <column name="transmission" value="AUTOMATIC"/>
+            <column name="drive" value="AWD"/>
+            <column name="color" value="Black"/>
+            <column name="engine" value="2500"/>
+            <column name="hp" value="203"/>
+            <column name="body" value="SUV"/>
+            <column name="places" value="5"/>
+            <column name="description" value="Reliable RAV4."/>
+            <column name="location_address" value="789 Oak St"/>
+            <column name="manager_id" value="1"/>
+        </insert>
+
+        <insert tableName="cars">
+            <column name="model_id" value="4"/>
+            <column name="price" value="60000"/>
+            <column name="year" value="2020"/>
+            <column name="mileage" value="20000"/>
+            <column name="fuel" value="DIESEL"/>
+            <column name="transmission" value="AUTOMATIC"/>
+            <column name="drive" value="AWD"/>
+            <column name="color" value="White"/>
+            <column name="engine" value="3000"/>
+            <column name="hp" value="335"/>
+            <column name="body" value="SUV"/>
+            <column name="places" value="5"/>
+            <column name="description" value="Luxury BMW X5."/>
+            <column name="location_address" value="555 Sunset Blvd"/>
+            <column name="manager_id" value="2"/>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>
