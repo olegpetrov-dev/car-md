@@ -29,7 +29,6 @@ class CarService(
 
     @Transactional(readOnly = true)
     fun searchCars(searchCarDto: SearchCarDto): PageDto<CarDto> {
-        val carSpecification = CarSpecification.createSpecification(searchCarDto)
         val sort = searchCarDto.sortBy?.let { getSort(it) } ?: Sort.unsorted()
         val pageable = PageRequest.of(
             searchCarDto.page - 1,
@@ -37,7 +36,18 @@ class CarService(
             sort
         )
 
-        val carsPage = carRepository.findAll(carSpecification, pageable)
+        val carSpecification = CarSpecification.createSpecification(searchCarDto, CarIncludeOptions(false, false))
+        val carIds = carRepository.findAll(carSpecification, pageable).content.map { it.id }
+        // needed to avoid in memory paging
+        val carIdsSpecification = CarSpecification.createSpecification(
+            SearchCarDto(
+                ids = carIds,
+                page = searchCarDto.page,
+                pageSize = searchCarDto.pageSize,
+                sortBy = searchCarDto.sortBy
+            )
+        )
+        val carsPage = carRepository.findAll(carIdsSpecification, pageable)
 
         return PageDto(carsPage, carMapper.toDtoList(carsPage.content));
     }

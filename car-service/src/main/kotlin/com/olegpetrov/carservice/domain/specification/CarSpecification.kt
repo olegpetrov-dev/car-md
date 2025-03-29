@@ -7,6 +7,7 @@ import com.olegpetrov.carservice.domain.Model
 import com.olegpetrov.carservice.domain.enums.Transmission
 import com.olegpetrov.carservice.domain.options.CarIncludeOptions
 import com.olegpetrov.carservice.dto.SearchCarDto
+import jakarta.persistence.criteria.Join
 import jakarta.persistence.criteria.JoinType
 import jakarta.persistence.criteria.Predicate
 import org.springframework.data.jpa.domain.Specification
@@ -20,22 +21,28 @@ class CarSpecification {
             return Specification { root, _, cb ->
                 val predicates = mutableListOf<Predicate>()
 
-                root.fetch<Car, Model>("model").fetch<Model, Make>("make")
+                // todo fix n + 1
+                val modelFetch = root.join<Car, Model>("model") as Join<Car, Model>
+                val makeFetch = modelFetch.join<Model, Make>("make") as Join<Model, Make>
 
                 if (includeOptions.includeManager) {
-                    root.fetch<Car, Manager>("manager", JoinType.LEFT)
+                    root.join<Car, Manager>("manager", JoinType.LEFT)
                 }
 
                 if (includeOptions.includePhotos) {
-                    root.fetch<Car, List<String>>("photos", JoinType.LEFT)
+                    root.join<Car, List<String>>("photos", JoinType.LEFT)
                 }
 
                 searchParams.id?.let { predicates.add(cb.equal(root.get<Long>("id"), it)) }
 
+                searchParams.ids?.takeIf { it.isNotEmpty() }?.let {
+                    predicates.add(root.get<Long>("id").`in`(it))
+                }
+
                 searchParams.make?.let {
                     predicates.add(
                         cb.equal(
-                            root.get<Model>("model").get<Make>("make").get<String>("name"), it
+                            makeFetch.get<String>("name"), it
                         )
                     )
                 }
@@ -43,7 +50,7 @@ class CarSpecification {
                 searchParams.model?.let {
                     predicates.add(
                         cb.equal(
-                            root.get<Model>("model").get<String>("name"), it
+                            modelFetch.get<String>("name"), it
                         )
                     )
                 }

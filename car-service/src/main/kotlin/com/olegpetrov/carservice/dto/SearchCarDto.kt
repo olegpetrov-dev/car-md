@@ -4,6 +4,7 @@ import com.olegpetrov.carservice.domain.enums.Transmission
 
 data class SearchCarDto(
     val id: Long? = null,
+    val ids: List<Long>? = null,
     val make: String? = null,
     val model: String? = null,
     val minPrice: Double? = null,
