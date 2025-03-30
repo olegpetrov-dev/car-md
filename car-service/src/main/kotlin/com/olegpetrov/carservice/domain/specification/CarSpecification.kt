@@ -4,6 +4,8 @@ import com.olegpetrov.carservice.domain.Car
 import com.olegpetrov.carservice.domain.Make
 import com.olegpetrov.carservice.domain.Manager
 import com.olegpetrov.carservice.domain.Model
+import com.olegpetrov.carservice.domain.enums.Drivetrain
+import com.olegpetrov.carservice.domain.enums.Fuel
 import com.olegpetrov.carservice.domain.enums.Transmission
 import com.olegpetrov.carservice.domain.options.CarIncludeOptions
 import com.olegpetrov.carservice.dto.SearchCarDto
@@ -61,8 +63,15 @@ class CarSpecification {
                 searchParams.maxYear?.let { predicates.add(cb.lessThanOrEqualTo(root.get("year"), it)) }
                 searchParams.minMileage?.let { predicates.add(cb.greaterThanOrEqualTo(root.get("mileage"), it)) }
                 searchParams.maxMileage?.let { predicates.add(cb.lessThanOrEqualTo(root.get("mileage"), it)) }
+                searchParams.minHp?.let { predicates.add(cb.greaterThanOrEqualTo(root.get("hp"), it)) }
+                searchParams.maxHp?.let { predicates.add(cb.lessThanOrEqualTo(root.get("hp"), it)) }
+                searchParams.minPlaces?.let { predicates.add(cb.greaterThanOrEqualTo(root.get("places"), it)) }
+                searchParams.maxPlaces?.let { predicates.add(cb.lessThanOrEqualTo(root.get("places"), it)) }
 
                 searchParams.transmission?.let { predicates.add(cb.equal(root.get<Transmission>("transmission"), it)) }
+                searchParams.drive?.let { predicates.add(cb.equal(root.get<Drivetrain>("drive"), it)) }
+                searchParams.fuel?.let { predicates.add(cb.equal(root.get<Fuel>("fuel"), it)) }
+                searchParams.body?.let { predicates.add(cb.equal(root.get<String>("body"), it)) }
 
                 cb.and(*predicates.toTypedArray())
             }

@@ -26,7 +26,7 @@ const CarSearch = () => {
     maxPlaces: 10,
     page: 1,
     pageSize: 12,
-    sortBy: '+price'
+    sortBy: ''
   });
   const [searchResults, setSearchResults] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -162,10 +162,9 @@ const CarSearch = () => {
             onChange={handleInputChange('drive')}
           >
             <option value="">All</option>
-            <option value="FWD">Front Wheel Drive</option>
-            <option value="RWD">Rear Wheel Drive</option>
-            <option value="AWD">All Wheel Drive</option>
-            <option value="4WD">Four Wheel Drive</option>
+            <option value="FWD">Front-Wheel Drive</option>
+            <option value="RWD">Rear-Wheel Drive</option>
+            <option value="AWD">All-Wheel Drive</option>
           </select>
         </div>
 
@@ -177,13 +176,13 @@ const CarSearch = () => {
             onChange={handleInputChange('body')}
           >
             <option value="">All</option>
-            <option value="SEDAN">Sedan</option>
+            <option value="Sedan">Sedan</option>
             <option value="SUV">SUV</option>
-            <option value="COUPE">Coupe</option>
-            <option value="HATCHBACK">Hatchback</option>
-            <option value="WAGON">Wagon</option>
-            <option value="VAN">Van</option>
-            <option value="PICKUP">Pickup</option>
+            <option value="Coupe">Coupe</option>
+            <option value="Hatchback">Hatchback</option>
+            <option value="Wagon">Wagon</option>
+            <option value="Van">Van</option>
+            <option value="Pickup">Pickup</option>
           </select>
         </div>
 
@@ -333,6 +332,25 @@ const CarSearch = () => {
           </div>
         </div>
 
+        <div className="filter-group">
+          <label htmlFor="sortBy">Sort By</label>
+          <select
+            id="sortBy"
+            value={searchParams.sortBy}
+            onChange={handleInputChange('sortBy')}
+          >
+            <option value="">No sorting</option>
+            <option value="+price">Price: Low to High</option>
+            <option value="-price">Price: High to Low</option>
+            <option value="+year">Year: Oldest First</option>
+            <option value="-year">Year: Newest First</option>
+            <option value="+mileage">Mileage: Low to High</option>
+            <option value="-mileage">Mileage: High to Low</option>
+            <option value="+model">Model: A to Z</option>
+            <option value="-model">Model: Z to A</option>
+          </select>
+        </div>
+
         <button
           className="search-button"
           onClick={handleSearch}
@@ -343,33 +361,39 @@ const CarSearch = () => {
       </div>
 
       <div className="search-results">
-        {searchResults?.content.map((car) => (
-          <div key={car.id} className="car-card">
-            <img
-              src={car.photos && car.photos.length > 0 ? car.photos[0] : defaultCarImage}
-              alt={`${car.make} ${car.model}`}
-              className="car-image"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = defaultCarImage;
-              }}
-            />
-            <div className="car-info">
-              <h3>{car.make} {car.model}</h3>
-              <p>Year: {car.year}</p>
-              <p>Mileage: {car.mileage.toLocaleString()} km</p>
-              <p className="car-price">${car.price.toLocaleString()}</p>
-              <button 
-                className="view-details-button"
-                onClick={() => handleViewDetails(car.id)}
-              >
-                View Details
-              </button>
-            </div>
+        {searchResults?.content.length === 0 ? (
+          <div className="no-results">
+            No cars matching filter
           </div>
-        ))}
+        ) : (
+          searchResults?.content.map((car) => (
+            <div key={car.id} className="car-card">
+              <img
+                src={car.photos && car.photos.length > 0 ? car.photos[0] : defaultCarImage}
+                alt={`${car.make} ${car.model}`}
+                className="car-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = defaultCarImage;
+                }}
+              />
+              <div className="car-info">
+                <h3>{car.make} {car.model}</h3>
+                <p>Year: {car.year}</p>
+                <p>Mileage: {car.mileage.toLocaleString()} km</p>
+                <p className="car-price">${car.price.toLocaleString()}</p>
+                <button 
+                  className="view-details-button"
+                  onClick={() => handleViewDetails(car.id)}
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+          ))
+        )}
 
-        {searchResults && (
+        {searchResults && searchResults.content.length > 0 && (
           <div className="pagination">
             <button
               onClick={() => handlePageChange({ target: { value: searchResults.page - 1 } })}
