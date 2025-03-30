@@ -35,7 +35,7 @@ class CarSpecification {
 
                 searchParams.id?.let { predicates.add(cb.equal(root.get<Long>("id"), it)) }
 
-                searchParams.ids?.takeIf { it.isNotEmpty() }?.let {
+                searchParams.ids?.let {
                     predicates.add(root.get<Long>("id").`in`(it))
                 }
 
