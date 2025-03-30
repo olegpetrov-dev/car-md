@@ -76,6 +76,14 @@ const CarDetails = () => {
               <p>{car.fuel}</p>
             </div>
             <div className="info-item">
+              <h3>Body Type</h3>
+              <p>{car.body}</p>
+            </div>
+            <div className="info-item">
+              <h3>Drive Type</h3>
+              <p>{car.drive}</p>
+            </div>
+            <div className="info-item">
               <h3>Color</h3>
               <p>{car.color}</p>
             </div>
@@ -86,8 +94,8 @@ const CarDetails = () => {
           {car.photos && car.photos.length > 0 ? (
             car.photos.map((photo, index) => (
               <div key={index} className="car-image-container" onClick={() => handleImageClick(photo)}>
-                <img 
-                  src={photo} 
+                <img
+                  src={photo}
                   alt={`${car.make} ${car.model} - Photo ${index + 1}`}
                   className="car-image"
                 />
@@ -95,15 +103,15 @@ const CarDetails = () => {
             ))
           ) : (
             <div className="car-image-container">
-              <img 
-                src={defaultCarImage} 
+              <img
+                src={defaultCarImage}
                 alt="Default car" 
                 className="car-image"
               />
             </div>
           )}
         </div>
-
+  
         {selectedImage && (
           <div className="image-modal" onClick={handleCloseModal}>
             <div className="modal-content">
@@ -112,17 +120,17 @@ const CarDetails = () => {
             </div>
           </div>
         )}
-
+  
         <div className="description">
           <h2>Description</h2>
           <p>{car.description}</p>
         </div>
-
+  
         <div className="location">
           <h2>Location</h2>
           <p>{car.locationAddress}</p>
         </div>
-
+  
         <div className="manager">
           <h2>Contact Information</h2>
           <p>Name: {car.manager.name}</p>

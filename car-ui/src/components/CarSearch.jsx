@@ -25,7 +25,7 @@ const CarSearch = () => {
     minPlaces: 1,
     maxPlaces: 10,
     page: 1,
-    pageSize: 12,
+    pageSize: 4,
     sortBy: ''
   });
   const [searchResults, setSearchResults] = useState(null);

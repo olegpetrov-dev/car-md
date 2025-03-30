@@ -16,6 +16,9 @@
         <insert tableName="makes">
             <column name="name" value="Ford"/>
         </insert>
+        <insert tableName="makes">
+            <column name="name" value="Mercedes"/>
+        </insert>
 
         <!-- Insert Models -->
         <insert tableName="models">
@@ -30,10 +33,13 @@
             <column name="make_id" value="1"/>
             <column name="name" value="RAV4"/>
         </insert>
-
         <insert tableName="models">
             <column name="make_id" value="2"/>
             <column name="name" value="X5"/>
+        </insert>
+        <insert tableName="models">
+            <column name="make_id" value="2"/>
+            <column name="name" value="4 series"/>
         </insert>
         <insert tableName="models">
             <column name="make_id" value="2"/>
@@ -43,7 +49,6 @@
             <column name="make_id" value="2"/>
             <column name="name" value="Z4"/>
         </insert>
-
         <insert tableName="models">
             <column name="make_id" value="3"/>
             <column name="name" value="Mustang"/>
@@ -55,6 +60,10 @@
         <insert tableName="models">
             <column name="make_id" value="3"/>
             <column name="name" value="Explorer"/>
+        </insert>
+        <insert tableName="models">
+            <column name="make_id" value="4"/>
+            <column name="name" value="E class"/>
         </insert>
 
         <!-- Insert Managers -->
@@ -136,6 +145,42 @@
             <column name="body" value="SUV"/>
             <column name="places" value="5"/>
             <column name="description" value="Luxury BMW X5."/>
+            <column name="location_address" value="555 Sunset Blvd"/>
+            <column name="manager_id" value="2"/>
+        </insert>
+
+        <insert tableName="cars">
+            <column name="model_id" value="5"/>
+            <column name="price" value="23000"/>
+            <column name="year" value="2018"/>
+            <column name="mileage" value="45000"/>
+            <column name="fuel" value="PETROL"/>
+            <column name="transmission" value="AUTOMATIC"/>
+            <column name="drive" value="RWD"/>
+            <column name="color" value="Black"/>
+            <column name="engine" value="2000"/>
+            <column name="hp" value="255"/>
+            <column name="body" value="Sedan"/>
+            <column name="places" value="4"/>
+            <column name="description" value="Bmw 4 series"/>
+            <column name="location_address" value="555 Sunset Blvd"/>
+            <column name="manager_id" value="1"/>
+        </insert>
+
+        <insert tableName="cars">
+            <column name="model_id" value="11"/>
+            <column name="price" value="43000"/>
+            <column name="year" value="2020"/>
+            <column name="mileage" value="17000"/>
+            <column name="fuel" value="PETROL"/>
+            <column name="transmission" value="AUTOMATIC"/>
+            <column name="drive" value="AWD"/>
+            <column name="color" value="White"/>
+            <column name="engine" value="3000"/>
+            <column name="hp" value="335"/>
+            <column name="body" value="Coupe"/>
+            <column name="places" value="4"/>
+            <column name="description" value="Mercedes E class Coupe."/>
             <column name="location_address" value="555 Sunset Blvd"/>
             <column name="manager_id" value="2"/>
         </insert>
